@@ -80,7 +80,7 @@ var copyFiles = function (done) {
 
 	// Copy static files
 	return src('src/copy/**/*')
-    .pipe(dest('dist/copy'));
+    .pipe(dest('dist/'));
    
     
 };
@@ -113,7 +113,7 @@ var startServer = function(done) {
   //browsersync
   browserSync.init({
     server: {
-      baseDir: './dist/copy'
+      baseDir: './dist/'
     }
   });
   done();
