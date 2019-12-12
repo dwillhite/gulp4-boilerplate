@@ -1,24 +1,24 @@
-var { gulp, src, dest, watch, series, parallel } = require('gulp');
-var sass = require('gulp-sass');
-var postcss = require('gulp-postcss');
-var prefix = require('autoprefixer');
-var minify = require('cssnano');
-var terser = require('gulp-terser');
-var rename = require('gulp-rename');
-var jshint = require('gulp-jshint');
-var stylish = require('jshint-stylish');
-var concat = require('gulp-concat');
-var del = require('del');
-var babel = require('gulp-babel');
-var imagemin = require('gulp-imagemin');
+const { gulp, src, dest, watch, series, parallel } = require('gulp');
+const sass = require('gulp-sass');
+const postcss = require('gulp-postcss');
+const prefix = require('autoprefixer');
+const minify = require('cssnano');
+const terser = require('gulp-terser');
+const rename = require('gulp-rename');
+const jshint = require('gulp-jshint');
+const stylish = require('jshint-stylish');
+const concat = require('gulp-concat');
+const del = require('del');
+const babel = require('gulp-babel');
+const imagemin = require('gulp-imagemin');
 
 // BrowserSync
-var browserSync = require('browser-sync');
+const browserSync = require('browser-sync');
 
 sass.compiler = require('node-sass');
 
 //remove dist directory 
-var cleanDist = function(done) {
+const cleanDist = function(done) {
   del.sync([
     'dist/'
   ])
@@ -26,7 +26,7 @@ var cleanDist = function(done) {
 }
 
 //build js
-var buildJS = function(done) {
+const buildJS = function(done) {
   done();
   return src('src/js/**/*.js')
     .pipe(babel({
@@ -38,7 +38,7 @@ var buildJS = function(done) {
 }
 
 // Lint scripts
-var lintScripts = function (done) {
+const lintScripts = function (done) {
 
 	done();
 
@@ -49,7 +49,7 @@ var lintScripts = function (done) {
 };
 
 //build styles
-var buildStyles = function(done) {
+const buildStyles = function(done) {
   done();
     return src('src/scss/**/*.scss')
       .pipe(sass()
@@ -74,19 +74,19 @@ var buildStyles = function(done) {
   
 }
 
-var copyFiles = function (done) {
+const copyFiles = function (done) {
 
   done();
 
 	// Copy static files
-	return src('src/copy/**/*')
+	return src('src/**/*')
     .pipe(dest('dist/'));
    
     
 };
 
 // image minification
-var buildImages = function (done) {
+const buildImages = function (done) {
 
  done();
 
@@ -109,7 +109,7 @@ var buildImages = function (done) {
 };
 
 //local server
-var startServer = function(done) {
+const startServer = function(done) {
   //browsersync
   browserSync.init({
     server: {
@@ -120,13 +120,13 @@ var startServer = function(done) {
 }
 
 //reload the browser when there is a change in the file
-var reloadBrowser = function(done){
+const reloadBrowser = function(done){
   browserSync.reload();
   done();
 };
 
 //watch for changes
-var watchSrc = function(done) {
+const watchSrc = function(done) {
   watch('/src', series(exports.default, reloadBrowser));
   done();
 }

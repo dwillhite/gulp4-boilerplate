@@ -1,1 +1,1 @@
-"use strict";console.log("main.js");var materials=["Hydrogen","Helium","Lithium","Beryllium"];console.log(materials.map((function(e){return e.length})));
+
